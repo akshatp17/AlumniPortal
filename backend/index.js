@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use("/v1", require("./router/authRouter"));
 app.use("/v1", require("./router/blogRouter"));
+app.use("/v1", require("./router/jobRouter"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
