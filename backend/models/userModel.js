@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     course: {
       type: String,
       require: [true, "Course is required"],
-      enum: ["B.Tech", "BCA", "BBA", "B.Com"],
+      enum: ["BE/BTech", "BCA", "BBA", "BCom"],
     },
     location: {
       type: String,

@@ -15,6 +15,7 @@ const Register = () => {
     const [step, setStep] = useState(1); // State for multi-step form
     const [formData, setFormData] = useState({}); // Store form data across steps
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(""); // State for error messages
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,10 +34,16 @@ const Register = () => {
         const finalData = { ...formData, ...data }; // Merge Step 1 & Step 2 data
         try {
             const response = await axios.post("http://localhost:8080/v1/register", finalData);
-            localStorage.setItem("userToken", response.data.token);
-            navigate("/home", { replace: true });
+            if (response.data.success) {
+                localStorage.setItem("userToken", response.data.token);
+                navigate("/home", { replace: true });
+            }
+            else {
+                throw new Error("Username or Email already exists");
+            }
         } catch (error) {
-            console.error("Registration failed:", error);
+            console.error("Registration failed:", error.message || error);
+            setErrorMessage(error.message || "Something went wrong!");
         }
     };
 
@@ -157,6 +164,8 @@ const Register = () => {
                         >
                             Next
                         </motion.button>
+
+                        {/* {errors && <p className="text-red-600 text-xs mt-1">{errors.message}</p>} */}
                     </form>
                 )}
 
@@ -196,7 +205,7 @@ const Register = () => {
                         <motion.div
                             initial={{ x: -30, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
                             <label className="block font-medium mt-4">Course:</label>
                             <select
@@ -238,11 +247,11 @@ const Register = () => {
                         <motion.div
                             initial={{ x: -30, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <label className="block font-medium mt-4">Year of Passing:</label>
                             <select
-                                {...register("yearOfPassing", { required: "Year of passing is required" })}
+                                {...register("batch", { required: "Year of passing is required" })}
                                 className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-700"
                             >
                                 <option value="">Select year of passing</option>
@@ -257,7 +266,7 @@ const Register = () => {
                         <motion.div
                             initial={{ x: -30, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
                         >
                             <label className="block font-medium mt-4">Current Location:</label>
                             <input
@@ -288,6 +297,7 @@ const Register = () => {
                                 Submit
                             </motion.button>
                         </div>
+                        {errorMessage && <p className="text-red-600 text-xs mt-1">{errorMessage}</p>}
                     </form>
                 )}
 
