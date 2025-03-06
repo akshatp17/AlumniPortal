@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Menu, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import DSCE from "../assets/dsce.png";
 
 const Navbar = () => {
@@ -8,7 +8,7 @@ const Navbar = () => {
         <nav className="bg-gray-100 shadow-md px-6 py-2 flex items-center justify-between">
 
             <div>
-                <img src="../assets/dsce.png" alt="dsce" width={20} />
+                <img src={DSCE} alt="dsce" width={36} />
             </div>
 
             <h1 className="text-lg font-bold">DSCE Alumni-Portal</h1>
