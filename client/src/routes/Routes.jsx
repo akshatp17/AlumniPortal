@@ -2,49 +2,43 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "../layout/MainLayout";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Landing from "../pages/Landing";
 
-// Lazy-loaded components for better performance
+// Lazy-loaded pages
 const Login = lazy(() => import("../pages/forms/Login"));
 const Register = lazy(() => import("../pages/forms/Register"));
 const Home = lazy(() => import("../pages/Home"));
-const Profile = lazy(() => import("../pages/User"));
+const Profile = lazy(() => import("../pages/User/User"));
 
 const AppRoutes = () => {
     return (
         <Router>
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    <Route path="/" element={
-                        <>
-                            <Landing />
-                            <Footer />
-                        </>
-                    } />
-                    <Route path="/login" element={
-                        <>
-                            <Login />
-                        </>
-                    } />
-                    <Route path="/register" element={
-                        <>
-                            <Register />
-                        </>
-                    } />
-                    {/* Protected Routes */}
-                    <Route path="/home" element={<ProtectedRoute>
-                        <Navbar />
-                        <Home />
-                        <Footer />
-                    </ProtectedRoute>} />
+                    {/* Public routes without layout */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
 
-                    <Route path="/user" element={<ProtectedRoute>
-                        <Navbar />
-                        <Profile />
-                        <Footer />
-                    </ProtectedRoute>} />
+                    {/* All other routes use MainLayout */}
+                    <Route element={<MainLayout />}>
+                        <Route path="/" element={<Landing />} />
+                        <Route
+                            path="/home"
+                            element={
+                                <ProtectedRoute>
+                                    <Home />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/user"
+                            element={
+                                <ProtectedRoute>
+                                    <Profile />
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Route>
                 </Routes>
             </Suspense>
         </Router>
