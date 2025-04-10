@@ -2,9 +2,10 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "../layout/MainLayout";
-import Landing from "../pages/Landing";
+import Loading from "../pages/Loading";
 
 // Lazy-loaded pages
+const Landing = lazy(() => import("../pages/Landing"));
 const Login = lazy(() => import("../pages/forms/Login"));
 const Register = lazy(() => import("../pages/forms/Register"));
 const Home = lazy(() => import("../pages/Home"));
@@ -13,7 +14,8 @@ const Profile = lazy(() => import("../pages/User/User"));
 const AppRoutes = () => {
     return (
         <Router>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
+                {/* Main layout with header and footer */}
                 <Routes>
                     {/* Public routes without layout */}
                     <Route path="/login" element={<Login />} />

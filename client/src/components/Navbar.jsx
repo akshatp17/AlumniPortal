@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { UserRound } from "lucide-react";
-import DSCE from "../assets/dsce.png";
+import navItems from "../data/NavItems";
 
 const Navbar = () => {
+
     return (
-        <nav className="bg-gray-100 shadow-md px-6 py-2 flex items-center justify-between">
-
-            <div>
-                <img src={DSCE} alt="dsce" width={36} />
-            </div>
-
-            <h1 className="text-lg font-bold">DSCE Alumni-Portal</h1>
-
-            <Link to={'/user'} className="flex gap-2 bg-gray-800 text-white px-4 py-1 rounded-md text-sm">
-                <UserRound size={18} />
-                YourProfile
-            </Link>
-        </nav >
+        <nav className="bg-[#0b5a99] text-[#f1f8fe] w-screen h-16">
+            <ul className="flex justify-between items-center h-full">
+                {navItems.map((item, index) => (
+                    <li
+                        key={index}
+                        className="h-full hover:bg-[#0d4c7f] w-full py-3 px-6 flex justify-center items-center text-center"
+                    >
+                        {item.link ? (
+                            <Link to={item.link} className="hover:underline cursor-pointer">
+                                {item.name}
+                            </Link>
+                        ) : (
+                            <button className="hover:underline cursor-pointer">{item.name}</button>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </nav>
     );
 };
 
