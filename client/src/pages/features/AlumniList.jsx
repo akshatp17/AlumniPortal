@@ -2,7 +2,11 @@ import React from 'react'
 
 const AlumniList = () => {
     return (
-        <div>AlumniList</div>
+        <>
+            <div>
+                This is the alumni list page.
+            </div>
+        </>
     )
 }
 
