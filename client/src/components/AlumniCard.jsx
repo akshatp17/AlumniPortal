@@ -81,52 +81,60 @@ const AlumniCard = () => {
 	}, [startIndex]);
 
 	return (
-		<div className="flex items-center gap-6 py-6 px-4 w-full overflow-hidden h-2xl justify-around">
-			<button
-				onClick={handlePrev}
-				className="text-black p-2 hover:bg-gray-500 rounded-full"
-			>
-				<ChevronLeft size={32} />
-			</button>
-
-			<div className="relative w-[1008px] overflow-hidden">
-				<div
-					ref={sliderRef}
-					className="flex gap-12"
-				>
-					{[0, 1, 2, 3].map((i) => {
-						const card = getCard(startIndex + i);
-						return (
-							<div
-								key={`${card.id}-${i}`}
-								className="w-76 h-fit bg-white rounded-xl shadow-lg overflow-hidden flex-shrink-0 transition-transform duration-500 opacity-90 text-black p-6"
-							>
-								<div>
-									<img
-										src={card.image}
-										className="w-full h-full object-cover"
-									/>
-								</div>
-
-								<div>
-									<h1 className="text-2xl my-5 mx-auto">{card.name}</h1>
-								</div>
-
-								<div>
-									<p>{card.desc}</p>
-								</div>
-							</div>
-						);
-					})}
-				</div>
+		<div className="py-6">
+			<div>
+				<h1 className="text-3xl font-bold">Our Notable Alumni</h1>
 			</div>
 
-			<button
-				onClick={handleNext}
-				className="text-black p-2 hover:bg-gray-500 rounded-full"
-			>
-				<ChevronRight size={32} />
-			</button>
+			<div className="flex items-center gap-6 py-6 px-4 w-full overflow-hidden h-2xl justify-around">
+				<button
+					onClick={handlePrev}
+					className="text-black p-2 hover:bg-gray-500 rounded-full"
+				>
+					<ChevronLeft size={32} />
+				</button>
+
+				<div className="relative w-[1008px] overflow-hidden">
+					<div
+						ref={sliderRef}
+						className="flex gap-12"
+					>
+						{[0, 1, 2, 3].map((i) => {
+							const card = getCard(startIndex + i);
+							return (
+								<div
+									key={`${card.id}-${i}`}
+									className="w-76 h-fit bg-white rounded-xl shadow-lg overflow-hidden flex-shrink-0 transition-transform duration-500 opacity-90 text-black p-6"
+								>
+									<div>
+										<img
+											src={card.image}
+											className="w-full h-full object-cover"
+										/>
+									</div>
+
+									<div>
+										<h1 className="text-2xl my-5 mx-auto">
+											{card.name}
+										</h1>
+									</div>
+
+									<div>
+										<p>{card.desc}</p>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+
+				<button
+					onClick={handleNext}
+					className="text-black p-2 hover:bg-gray-500 rounded-full"
+				>
+					<ChevronRight size={32} />
+				</button>
+			</div>
 		</div>
 	);
 };
