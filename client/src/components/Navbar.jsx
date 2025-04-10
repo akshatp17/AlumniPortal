@@ -5,7 +5,7 @@ import navItems from "../data/NavItems";
 const Navbar = () => {
 
     return (
-        <nav className="bg-[#0b5a99] text-[#f1f8fe] w-screen h-16">
+        <nav className="bg-[#0b5a99] text-[#f1f8fe] h-16">
             <ul className="flex justify-between items-center h-full">
                 {navItems.map((item, index) => (
                     <li
