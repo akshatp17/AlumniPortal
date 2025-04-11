@@ -11,6 +11,7 @@ const Register = lazy(() => import("../pages/forms/Register"));
 const Home = lazy(() => import("../pages/Home"));
 const Profile = lazy(() => import("../pages/User/User"));
 const AlumniList = lazy(() => import("../pages/features/AlumniList"));
+const Error = lazy(() => import("../pages/Error"));
 
 const AppRoutes = () => {
     return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
                     {/* Public routes without layout */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="*" element={<Error />} />
 
                     {/* All other routes use MainLayout */}
                     <Route element={<MainLayout />}>
