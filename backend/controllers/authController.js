@@ -21,7 +21,6 @@ const registerController = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashedPassword;
-
     const user = new userModel(req.body);
     await user.save();
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
