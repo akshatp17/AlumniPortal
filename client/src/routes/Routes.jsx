@@ -10,6 +10,7 @@ const Login = lazy(() => import("../pages/forms/Login"));
 const Register = lazy(() => import("../pages/forms/Register"));
 const Home = lazy(() => import("../pages/Home"));
 const Profile = lazy(() => import("../pages/User/User"));
+const AlumniList = lazy(() => import("../pages/features/AlumniList"));
 
 const AppRoutes = () => {
     return (
@@ -37,6 +38,14 @@ const AppRoutes = () => {
                             element={
                                 <ProtectedRoute>
                                     <Profile />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/alumni-list"
+                            element={
+                                <ProtectedRoute>
+                                    <AlumniList />
                                 </ProtectedRoute>
                             }
                         />
